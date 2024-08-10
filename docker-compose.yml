@@ -1,0 +1,35 @@
+services:
+  app:
+    image: webdevops/php-nginx:8.2
+    container_name: laravel_app
+    ports:
+      - 8000:80
+    volumes:
+      - .:/app
+    working_dir: /app
+    environment:
+      - PHP_DISPLAY_ERRORS=1
+      - PHP_ERROR_REPORTING=E_ALL
+    depends_on:
+      - db
+      - redis
+
+  db:
+    image: mysql:8.0
+    container_name: laravel_db
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: nmw_db
+    volumes:
+      - db_data:/var/lib/mysql
+
+  redis:
+    image: redis:6.0-alpine
+    container_name: laravel_redis
+    ports:
+      - 6379:6379
+
+volumes:
+  db_data:
