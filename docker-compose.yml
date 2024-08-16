@@ -39,9 +39,9 @@ services:
             - .docker/db/sql:/docker-entrypoint-initdb.d
         environment:
             MYSQL_ROOT_PASSWORD: root
-            MYSQL_DATABASE: nmw
+            MYSQL_DATABASE: nmw_db
             MYSQL_USER: nmw
-            MYSQL_PASSWORD:
+            MYSQL_PASSWORD: nmw
 
     ####################################################################################################
     # phpMyAdmin
@@ -50,8 +50,6 @@ services:
         image: phpmyadmin/phpmyadmin
         ports:
             - 8080:80
-        links:
-            - db
         environment:
             PMA_HOST: db
             PMA_PORT: 3306
