@@ -1,0 +1,23 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+
+class Service extends Model
+{
+    use HasFactory;
+
+    protected $table = 'services';
+    protected $primaryKey = 'service_id';
+
+    protected $fillable = [
+        'nom', 'description'
+    ];
+
+    public function benevoles()
+    {
+        return $this->belongsToMany(Benevole::class, 'benevoles_services', 'service_id', 'benevole_id');
+    }
+}
