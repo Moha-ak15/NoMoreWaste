@@ -26,7 +26,7 @@ class AuthenticatedSessionController extends Controller
     {
         $request->validate([
             'email' => ['required', 'string', 'email'],
-            'password' => ['required', 'string'], 
+            'password' => ['required', 'string'],
         ]);
 
         if (Auth::attempt($request->only('email', 'password'), $request->boolean('remember'))) {
@@ -34,7 +34,7 @@ class AuthenticatedSessionController extends Controller
 
             // Redirection autant qu'admin
             if (Auth::user()->usertype === 'admin') {
-                return redirect()->route('backoffice.dashboard');
+                return redirect()->route('dashboard');
             } else { // Redirection autant que client si on est pas admin
                 return redirect()->route('frontoffice.home');
             }

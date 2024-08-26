@@ -13,8 +13,8 @@ class BenevoleController extends Controller
      */
     public function index()
     {
-        $benevole = Benevole::all();
-        return view('backoffice.benevoles.index', compact('benevole'));
+        $benevoles = Benevole::all();
+        return view('backoffice.benevoles.index', compact('benevoles'));
     }
 
     /**
@@ -46,25 +46,25 @@ class BenevoleController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $benevoles_id)
     {
-        $benevole = Benevole::findOrFail($id);
+        $benevoles = Benevole::findOrFail($benevoles_id);
         return view('benevoles.show', compact('benevole'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $benevoles_id)
     {
-        $benevole = Benevole::findOrFail($id);
+        $benevoles = Benevole::findOrFail($benevoles_id);
         return view('backoffice.benevoles.edit', compact('benevole'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $benevoles_id)
     {
         $request->validate([
             'nom' => 'required|string|max:255',
@@ -74,18 +74,18 @@ class BenevoleController extends Controller
             'date_insription' => 'required|date',
         ]);
 
-        $benevole = Benevole::findOrFail($id);
-        $benevole->update($request->all());
+        $benevoles = Benevole::findOrFail($benevoles_id);
+        $benevoles->update($request->all());
         return redirect()->route('benevoles.index')->with('success', 'Benevole modifié avec succès :)');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $benevoles_id)
     {
-        $benevole = Benevole::findOrFail($id);
-        $benevole->delete();
+        $benevoles = Benevole::findOrFail($benevoles_id);
+        $benevoles->delete();
         return redirect()->route('benevoles.index')->with('success', 'Benevole supprimé avec succès :)');
     }
 }

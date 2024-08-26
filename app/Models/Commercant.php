@@ -9,15 +9,15 @@ class Commercant extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_commercant';
+    protected $primaryKey = 'commercant_id';
     protected $tab = 'commercants';
     protected $fillable = [
-        'nom', 'adresse', 'email', 'telephone', 'date_adhesion', 'date_renouvellement'
+        'entreprise', 'responsable', 'adresse', 'email', 'telephone', 'type_commercant', 'date_adhesion', 'date_renouvellement'
     ];
 
     public function collectes()
     {
         return $this->hasMany(Collecte::class, 'commercant_id', 'commercant_id');
     }
-    
+
 }

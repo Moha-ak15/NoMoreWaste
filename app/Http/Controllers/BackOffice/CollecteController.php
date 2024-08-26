@@ -49,25 +49,25 @@ class CollecteController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $collecte_id)
     {
-        $collecte = Collecte::findOrFail($id);
+        $collecte = Collecte::findOrFail($collecte_id);
         return view('backoffice.collectes.show', compact('collecte'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $collecte_id)
     {
-        $collecte = Collecte::findOrFail($id);
+        $collecte = Collecte::findOrFail($collecte_id);
         return view('backoffice.collectes.edit', compact('collecte'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $collecte_id)
     {
         $request->validate([
             'date_collecte' => 'required|date',
@@ -76,7 +76,7 @@ class CollecteController extends Controller
             'quantite_collecte' => 'required|integer|min:1',
         ]);
 
-        $collecte = Collecte::findOrFail($id);
+        $collecte = Collecte::findOrFail($collecte_id);
         $collecte->update([
             'date_collecte' => $request['date_collecte'],
             'commercant_id' => $request['commercant_id'],
@@ -89,9 +89,9 @@ class CollecteController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $collecte_id)
     {
-        $collecte = Collecte::findOrFail($id);
+        $collecte = Collecte::findOrFail($collecte_id);
         $collecte->delete();
         return redirect()->route('collectes.index')->with('success', 'Collecte supprimée avec succès :)');
     }
