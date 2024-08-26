@@ -6,7 +6,7 @@
             </div>
             <div>
                 <a href="{{ route('frontoffice.home') }}" class="text-white px-3">Home</a>
-                <a href="{{ route('dashboard') }}" class="text-white px-3">Dashboard</a>
+                <a href="{{ route('frontoffice.dashboard') }}" class="text-white px-3">Dashboard</a>
                 <a href="{{ route('logout') }}" class="text-white px-3"
                    onclick="event.preventDefault(); document.getElementById('logout-form').submit();">
                     Déconnexion

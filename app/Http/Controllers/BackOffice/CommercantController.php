@@ -11,9 +11,16 @@ class CommercantController extends Controller
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        $commercants = Commercant::all();
+        $search = $request->input('search');
+
+        $commercants = Commercant::query()
+            ->where('entreprise', 'LIKE', "%{$search}%")
+            ->orWhere('type_commercant', 'LIKE', "%{$search}%")
+            ->orWhere('adresse', 'LIKE', "%{$search}%")
+            ->get();
+
         return view('backoffice.commercants.index', compact('commercants'));
     }
 
@@ -32,10 +39,12 @@ class CommercantController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'non' => 'required|string|max:255',
+            'entreprise' => 'required|string|max:255',
+            'responsable' => 'required|string|max:50',
             'adresse' => 'required|string|max:255',
             'email' => 'required|email|unique:commercants',
             'telephone' => 'required|string|max:20',
+            'type_commercant' => 'required|string|max:50',
         ]);
 
         Commercant::create($request->all());
@@ -45,44 +54,47 @@ class CommercantController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(string $commercants_id)
     {
-        $commercant = Commercant::findOrFail($id);
+        $commercant = Commercant::findOrFail($commercants_id);
         return view('backoffice.commercants.show', compact('commercant'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(string $commercants_id)
     {
-        $commercant = Commercant::findOrFail($id);
-        return view('backoffice.commercants.edit', compact('commercant'));
+        $commercants = Commercant::findOrFail($commercants_id);
+        return view('backoffice.commercants.edit', compact('commercants'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, string $commercants_id)
     {
+        $commercants = Commercant::findOrFail($commercants_id);
+
         $request->validate([
-            'non' => 'required|string|max:255',
+            'entreprise' => 'required|string|max:255',
+            'responsable' => 'required|string|max:50',
             'adresse' => 'required|string|max:255',
-            'email' => 'required|email|unique:commercants,email,' . $id,
-            'telephone' => 'required|string|max:20',
+            'telephone' => 'required|string|max:20|unique:commercants,telephone,' . $commercants->commercant_id,
+            'type_commercant' => 'required|string|max:50',
         ]);
 
-        $commercant = Commercant::findOrFail($id);
-        $commercant->update($request->all());
-        return redirect()->route('commercants.index')->with('success', 'Commercant modifié avec succès :)');
+        $commercants->update($request->except('email'));
+
+        return redirect()->route('backoffice.commercants.index')->with('success', 'Commerçant mis à jour avec succès.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(string $commercants_id)
     {
-        $commercant = Commercant::findOrFail($id);
+        $commercant = Commercant::findOrFail($commercants_id);
         $commercant->delete();
         return redirect()->route('commercants.index')->with('success', 'Commercant supprimé avec succès :)');
     }
