@@ -22,6 +22,19 @@
                     </div>
                 </div>
 
+                <!-- Produits Card -->
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <h3 class="text-lg font-semibold">{{ __('Produits') }}</h3>
+                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                            Gérez les produits
+                        </p>
+                        <a href="{{ route('produits.index') }}" class="mt-4 inline-block text-blue-600 dark:text-blue-400 hover:underline">
+                            Voir les Produits
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Collectes Card -->
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -74,6 +87,19 @@
                     </div>
                 </div>
 
+                <!-- Competances des Bénévoles Card -->
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <h3 class="text-lg font-semibold">{{ __('Compétence Bénévoles') }}</h3>
+                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                            Gérez les compétences des bénévoles de l'association.
+                        </p>
+                        <a href="{{ route('skills_benevole.index') }}" class="mt-4 inline-block text-blue-600 dark:text-blue-400 hover:underline">
+                            Voir les Compétences des Bénévoles
+                        </a>
+                    </div>
+                </div>
+
                 <!-- Services Card -->
                 <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
                     <div class="p-6 text-gray-900 dark:text-gray-100">
@@ -83,6 +109,19 @@
                         </p>
                         <a href="{{ route('services.index') }}" class="mt-4 inline-block text-blue-600 dark:text-blue-400 hover:underline">
                             Voir les Services
+                        </a>
+                    </div>
+                </div>
+
+                <!-- Véhicules Card -->
+                <div class="bg-white dark:bg-gray-800 overflow-hidden shadow-sm sm:rounded-lg">
+                    <div class="p-6 text-gray-900 dark:text-gray-100">
+                        <h3 class="text-lg font-semibold">{{ __('Vehicules') }}</h3>
+                        <p class="mt-2 text-sm text-gray-600 dark:text-gray-400">
+                            Gérez les vehicules.
+                        </p>
+                        <a href="{{ route('vehicules.index') }}" class="mt-4 inline-block text-blue-600 dark:text-blue-400 hover:underline">
+                            Voir les Vehicules
                         </a>
                     </div>
                 </div>

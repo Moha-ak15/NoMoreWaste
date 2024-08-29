@@ -23,7 +23,7 @@ class Tournee extends Model
 
     public function benevoles()
     {
-        return $this->belongsToMany(Benevole::class, 'inscriptions_benevoles', 'tournee_id', 'benevole_id');
+        return $this->belongsToMany(Benevole::class, 'registration_benevoles', 'tournee_id', 'benevole_id');
     }
 
 

@@ -9,11 +9,16 @@ class Benevole extends Model
 {
     use HasFactory;
 
+    protected $primaryKey = 'benevole_id';
     protected $table = 'benevoles';
 
     protected $fillable = [
         'nom', 'prenom', 'email', 'telephone', 'date_inscription', 'disponibilite'
     ];
+
+    public function collecte(){
+        return $this->belongsToMany(Collecte::class, 'benevole_collecte', 'benevole_id', 'collecte_id');
+    }
 
     public function skillBenevole()
     {

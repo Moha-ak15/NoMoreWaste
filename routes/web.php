@@ -9,6 +9,9 @@ use App\Http\Controllers\BackOffice\ServiceController;
 use App\Http\Controllers\BackOffice\StockController;
 use App\Http\Controllers\BackOffice\TourneeController;
 use App\Http\Controllers\BackOffice\UsersController;
+use App\Http\Controllers\BackOffice\VehiculeController;
+use App\Http\Controllers\BackOffice\ProduitController;
+use App\Http\Controllers\Backoffice\SkillBenevoleController;
 
 
 Route::middleware('auth')->group(function () {
@@ -40,6 +43,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('services', ServiceController::class);
     Route::resource('stocks', StockController::class);
     Route::resource('tournees', TourneeController::class);
+    Route::resource('vehicules', VehiculeController::class);
+    Route::resource('produits', ProduitController::class);
+    Route::resource('skills_benevole', SkillBenevoleController::class);
+
 });
 
 require __DIR__.'/auth.php';

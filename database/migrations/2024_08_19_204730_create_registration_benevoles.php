@@ -14,8 +14,8 @@ return new class extends Migration
         Schema::create('registration_benevoles', function (Blueprint $table) {
             $table->id();
             $table->foreignId('benevole_id')->constrained('benevoles', 'benevole_id')->onDelete('cascade');
-            $table->foreignId('tournee_id')->constrained('tournees')->onDelete('cascade');
-            $table->string('role');
+            $table->foreignId('tournee_id')->constrained('tournees', 'tournee_id')->onDelete('cascade');
+            $table->string('role')->default('participant');
             $table->timestamps();
         });
     }

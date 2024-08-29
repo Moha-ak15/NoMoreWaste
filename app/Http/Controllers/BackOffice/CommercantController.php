@@ -80,13 +80,13 @@ class CommercantController extends Controller
             'entreprise' => 'required|string|max:255',
             'responsable' => 'required|string|max:50',
             'adresse' => 'required|string|max:255',
-            'telephone' => 'required|string|max:20|unique:commercants,telephone,' . $commercants->commercant_id,
+            'telephone' => 'required|string|max:20|unique:commercants,telephone,' . $commercants->commercant_id . ',commercant_id',
             'type_commercant' => 'required|string|max:50',
         ]);
 
         $commercants->update($request->except('email'));
 
-        return redirect()->route('backoffice.commercants.index')->with('success', 'Commerçant mis à jour avec succès.');
+        return redirect()->route('commercants.index')->with('success', 'Commerçant mis à jour avec succès.');
     }
 
     /**

@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('email')->unique();
             $table->string('telephone', 20);
             $table->date('date_inscription');
-            $table->string('disponibilite');
+            $table->string('disponibilite'); // la disponibilité du bénévole 
             $table->timestamps();
         });
     }

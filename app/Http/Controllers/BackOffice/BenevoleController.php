@@ -35,21 +35,28 @@ class BenevoleController extends Controller
             'prenom' => 'required|string|max:255',
             'email' => 'required|email|unique:benevoles',
             'telephone' => 'required|string|max:20',
-            'date_insription' => 'required|date',
-
+            'disponibilite' => 'required|string',
         ]);
 
-        Benevole::create($request->all());
-        return redirect()->route('benevoles.index')->with('success', 'Benevole créé avec succès :)');
+        Benevole::create([
+            'nom' => $request->input('nom'),
+            'prenom' => $request->input('prenom'),
+            'email' => $request->input('email'),
+            'telephone' => $request->input('telephone'),
+            'date_inscription' => $request->input('date_inscription'),
+            'disponibilite' => $request->input('disponibilite'),
+        ]);
+
+        return redirect()->route('benevoles.index')->with('success', 'Bénévole créé avec succès :)');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $benevoles_id)
+    public function show(string $benevole_id)
     {
-        $benevoles = Benevole::findOrFail($benevoles_id);
-        return view('benevoles.show', compact('benevole'));
+        $benevoles = Benevole::findOrFail($benevole_id);
+        return view('backoffice.benevoles.show', compact('benevoles'));
     }
 
     /**
@@ -58,7 +65,7 @@ class BenevoleController extends Controller
     public function edit(string $benevoles_id)
     {
         $benevoles = Benevole::findOrFail($benevoles_id);
-        return view('backoffice.benevoles.edit', compact('benevole'));
+        return view('backoffice.benevoles.edit', compact('benevoles'));
     }
 
     /**
@@ -69,7 +76,7 @@ class BenevoleController extends Controller
         $request->validate([
             'nom' => 'required|string|max:255',
             'prenom' => 'required|string|max:255',
-            'email' => 'required|email|unique:benevoles',
+            'email' => 'required|email|unique:benevoles,email,' . $benevoles_id,
             'telephone' => 'required|string|max:20',
             'date_insription' => 'required|date',
         ]);

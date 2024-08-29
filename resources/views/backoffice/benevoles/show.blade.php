@@ -8,12 +8,12 @@
         <h3 class="card-title">Détails du Bénévole</h3>
     </div>
     <div class="card-body">
-        <p><strong>Nom:</strong> {{ $benevole->nom }}</p>
-        <p><strong>Prénom:</strong> {{ $benevole->prenom }}</p>
-        <p><strong>Email:</strong> {{ $benevole->email }}</p>
-        <p><strong>Téléphone:</strong> {{ $benevole->telephone }}</p>
-        <p><strong>Disponibilité:</strong> {{ $benevole->disponibilite }}</p>
-        <a href="{{ route('benevoles.index') }}" class="btn btn-primary">Retour à la liste</a>
+        <p><strong>Nom:</strong> {{ $benevoles->nom }}</p>
+        <p><strong>Prénom:</strong> {{ $benevoles->prenom }}</p>
+        <p><strong>Email:</strong> {{ $benevoles->email }}</p>
+        <p><strong>Téléphone:</strong> {{ $benevoles->telephone }}</p>
+        <p><strong>Disponibilité:</strong> {{ $benevoles->disponibilite }}</p>
+        <a href="{{ route('benevoles.index') }}" class="btn btn-secondary">Retour à la liste</a>
     </div>
 </div>
 @endsection
