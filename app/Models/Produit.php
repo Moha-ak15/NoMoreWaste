@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Produit extends Model
 {
@@ -12,8 +13,29 @@ class Produit extends Model
     protected $primaryKey = 'produit_id';
     protected $table = 'produits';
     protected $fillable = [
-        'code_barres', 'nom', 'categorie', 'date_peremption', 'quantite', 'commercant_id'
+        'code_barre', 'nom', 'categorie', 'date_peremption', 'quantite', 'commercant_id'
     ];
+
+    protected static function boot()
+    {
+        parent::boot();
+
+        static::creating(function ($produit) {
+            if (empty($produit->code_barre)) {
+                $produit->code_barre = self::generateUniqueCodeBarres();
+            }
+        });
+    }
+
+    private static function generateUniqueCodeBarre()
+    {
+        do {
+            $code_barre = Str::random(12); // Génère une chaîne aléatoire de 12 caractères
+        } while (self::where('code_barre', $code_barre)->exists());
+
+        return $code_barre;
+    }
+
 
     public function collectes()
     {

@@ -5,15 +5,27 @@ namespace App\Http\Controllers\BackOffice;
 use Illuminate\Http\Request;
 use App\Models\Collecte;
 use App\Http\Controllers\Controller;
+use App\Models\Commercant;
+use App\Models\Produit;
+use App\Models\Benevole;
+use App\Models\Vehicule;
 class CollecteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
-    public function index()
+    public function index(Request $request, Commercant $commercants)
     {
-        $collectes = Collecte::all();
-        return view('backoffice.collectes.index', compact('collectes'));
+        $query = Collecte::where('commercant_id', $commercants->commercant_id);
+
+        if ($request->filled('statut_collecte')) {
+            $query->where('statut_collecte', $request->statut_collecte);
+        }
+
+        if ($request->filled('date_collecte')) {
+            $query->whereDate('date_collecte', $request->date_collecte);
+        }
+
+        $collectes = $query->orderBy('date_collecte', 'desc')->paginate(10);
+
+        return view('backoffice.collectes.index', compact('collectes', 'commercants'));
     }
 
     /**
@@ -21,7 +33,12 @@ class CollecteController extends Controller
      */
     public function create()
     {
-        return view('backoffice.collectes.create');
+        $commercants = Commercant::all();
+        $produits = Produit::all();
+        $benevoles = Benevole::all();
+        $vehicules = Vehicule::all();
+
+        return view('backoffice.collectes.create', compact('commercants', 'produits', 'benevoles', 'vehicules'));
     }
 
     /**
@@ -31,18 +48,25 @@ class CollecteController extends Controller
     {
         $request->validate([
             'date_collecte' => 'required|date',
-            'commercant_id' => 'required|exists:commercants,id',
-            'produit_id' => 'required|exists:produits,id',
-            'quantite_collecte' => 'required|integer|min:1',
+            'commercant_id' => 'required|exists:commercants,commercant_id',
+            'produit_id' => 'required|exists:produits,produit_id',
+            'quantite_collectee' => 'required|integer|min:1',
+            'benevoles' => 'required|array',
+            'benevoles.*' => 'exists:benevoles,benevole_id',
+            'vehicules' => 'required|array',
+            'vehicules.*' => 'exists:vehicules,vehicule_id',
 
         ]);
 
-        Collecte::create([
+        $collecte = Collecte::create([
             'date_collecte' => $request['date_collecte'],
             'commercant_id' => $request['commercant_id'],
             'produit_id' => $request['produit_id'],
-            'quantite_collecte' => $request['quantite_collecte'],
+            'quantite_collectee' => $request['quantite_collectee'],
         ]);
+        $collecte->benevoles()->attach($request->benevoles);
+        $collecte->vehicules()->attach($request->vehicules);
+
         return redirect()->route('collectes.index')->with('success', 'Collecte créée avec succès :)');
     }
 
@@ -51,7 +75,7 @@ class CollecteController extends Controller
      */
     public function show(string $collecte_id)
     {
-        $collecte = Collecte::findOrFail($collecte_id);
+        $collectes = Collecte::findOrFail($collecte_id);
         return view('backoffice.collectes.show', compact('collecte'));
     }
 
@@ -73,7 +97,7 @@ class CollecteController extends Controller
             'date_collecte' => 'required|date',
             'commercant_id' => 'required|exists:commercants,id',
             'produit_id' => 'required|exists:produits,id',
-            'quantite_collecte' => 'required|integer|min:1',
+            'quantite_collectee' => 'required|integer|min:1',
         ]);
 
         $collecte = Collecte::findOrFail($collecte_id);
@@ -81,7 +105,7 @@ class CollecteController extends Controller
             'date_collecte' => $request['date_collecte'],
             'commercant_id' => $request['commercant_id'],
             'produit_id' => $request['produit_id'],
-            'quantite_collecte' => $request['quantite_collecte'],
+            'quantite_collectee' => $request['quantite_collectee'],
         ]);
         return redirect()->route('collectes.index')->with('success', 'Collecte modifiée avec succès :)');
     }

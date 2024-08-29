@@ -26,7 +26,7 @@
                 <label for="password_confirmation">Confirmer le Mot de Passe</label>
                 <input type="password" name="password_confirmation" class="form-control" required>
             </div>
-            <button type="submit" class="btn btn-success">Enregistrer</button>
+            <button type="submit" class="btn btn-success mt-3">Enregistrer</button>
             <a href="{{ route('users.index') }}" class="btn btn-secondary">Annuler</a>
         </form>
     </div>
