@@ -19,19 +19,19 @@
                 </div>
             @endif
 
-            <form action="{{ route('services.store') }}" method="POST">
+            <form action="{{ route('service_proposals.store') }}" method="POST">
                 @csrf
                 <div class="form-group">
-                    <label for="nom">Nom</label>
+                    <label for="nom">Nom du Service</label>
                     <input type="text" name="nom" class="form-control" required>
                 </div>
 
                 <div class="form-group">
                     <label for="description">Description</label>
-                    <textarea name="description" class="form-control" rows="5" required></textarea>
+                    <textarea name="description" class="form-control" rows="3" required></textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Ajouter le Service</button>
+                <button type="submit" class="btn btn-primary mt-3">Créer le Service</button>
             </form>
         </div>
     </div>

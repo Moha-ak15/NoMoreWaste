@@ -13,11 +13,21 @@ class Service extends Model
     protected $primaryKey = 'service_id';
 
     protected $fillable = [
-        'nom', 'description'
+        'nom', 'description', 'statut'
     ];
 
     public function benevoles()
     {
         return $this->belongsToMany(Benevole::class, 'benevoles_services', 'service_id', 'benevole_id');
+    }
+
+    public function proposals()
+    {
+        return $this->hasMany(ServiceProposal::class, 'service_id', 'service_id');
+    }
+
+    public function plannings()
+    {
+        return $this->hasMany(ServicePlanning::class, 'service_id', 'service_id');
     }
 }

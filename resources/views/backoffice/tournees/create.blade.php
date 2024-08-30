@@ -60,7 +60,7 @@
                     <small class="form-text text-muted">Maintenez Ctrl (Windows) ou Command (Mac) pour sélectionner plusieurs stocks.</small>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Ajouter la Tournée</button>
+                <button type="submit" class="btn btn-primary mt-3">Ajouter la Tournée</button>
             </form>
         </div>
     </div>
