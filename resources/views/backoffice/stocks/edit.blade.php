@@ -44,7 +44,7 @@
                     <input type="date" name="date_entree_stock" class="form-control" value="{{ $stock->date_entree_stock }}" required>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Mettre à jour le Stock</button>
+                <button type="submit" class="btn btn-primary mt-3">Mettre à jour le Stock</button>
             </form>
         </div>
     </div>

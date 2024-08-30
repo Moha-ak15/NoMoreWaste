@@ -33,7 +33,7 @@
                     <textarea name="description" class="form-control" rows="5" required>{{ $service->description }}</textarea>
                 </div>
 
-                <button type="submit" class="btn btn-primary">Mettre à jour le Service</button>
+                <button type="submit" class="btn btn-primary mt-3">Mettre à jour le Service</button>
             </form>
         </div>
     </div>

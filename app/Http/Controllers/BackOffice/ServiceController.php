@@ -1,17 +1,20 @@
 <?php
 
-namespace App\Http\Controllers\Backoffice;
+namespace App\Http\Controllers\BackOffice;
 
 use App\Http\Controllers\Controller;
-use App\Models\Service;
 use Illuminate\Http\Request;
+use App\Models\Service;
+use App\Models\ServiceProposal;
+
 
 class ServiceController extends Controller
 {
     public function index()
     {
         $services = Service::all();
-        return view('backoffice.services.index', compact('services'));
+        $proposals = ServiceProposal::all();
+        return view('backoffice.services.index', compact('services', 'proposals'));
     }
 
     public function create()
@@ -26,8 +29,15 @@ class ServiceController extends Controller
             'description' => 'required|string',
         ]);
 
-        Service::create($request->all());
-        return redirect()->route('services.index')->with('success', 'Service créé avec succès :)');
+        dd($request->all());
+
+        ServiceProposal::create([
+            'user_id' => auth()->id(),
+            'nom' => $request->input('nom'),
+            'description' => $request->input('description'),
+        ]);
+
+        return redirect()->route('service_proposals.index')->with('success', 'Proposition de service soumise avec succès');
     }
 
     public function show(string $id)
@@ -50,7 +60,10 @@ class ServiceController extends Controller
         ]);
 
         $service = Service::findOrFail($id);
-        $service->update($request->all());
+        $service->update([
+            'nom' => $request->input('nom'),
+            'description' => $request->input('description'),
+        ]);
         return redirect()->route('services.index')->with('success', 'Service mis à jour avec succès :)');
     }
 

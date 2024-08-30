@@ -12,6 +12,8 @@ use App\Http\Controllers\BackOffice\UsersController;
 use App\Http\Controllers\BackOffice\VehiculeController;
 use App\Http\Controllers\BackOffice\ProduitController;
 use App\Http\Controllers\Backoffice\SkillBenevoleController;
+use App\Http\Controllers\BackOffice\ServiceProposalController;
+use App\Http\Controllers\BackOffice\ServicePlanningController;
 
 
 Route::middleware('auth')->group(function () {
@@ -46,7 +48,10 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::resource('vehicules', VehiculeController::class);
     Route::resource('produits', ProduitController::class);
     Route::resource('skills_benevole', SkillBenevoleController::class);
-
+    Route::resource('service_plannings', ServicePlanningController::class);
+    Route::resource('service_proposals', ServiceProposalController::class)->only(['index', 'show', 'store']);
+    Route::post('service_proposals/{id}/approve', [ServiceProposalController::class, 'approve'])->name('service_proposals.approve');
+    Route::post('service_proposals/{id}/reject', [ServiceProposalController::class, 'reject'])->name('service_proposals.reject');
 });
 
 require __DIR__.'/auth.php';
