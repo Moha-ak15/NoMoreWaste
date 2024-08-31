@@ -23,9 +23,9 @@ class CommercantController extends Controller
         return view('commercantoffice.dashboard', compact('commercant', 'collectes'));
     }
 
-    public function showRegistrationForm()
+    public function registrationForm()
     {
-        return view('commercantoffice.inscription');
+        return view('commercantoffice.inscription-commercant');
     }
 
     public function register(Request $request)

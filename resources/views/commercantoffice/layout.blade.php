@@ -29,7 +29,6 @@
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/locales/fr.js"></script>
 
-    <!-- Inclusions des scripts spécifiques aux vues -->
     @yield('scripts')
 </body>
 </html>
