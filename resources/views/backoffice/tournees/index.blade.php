@@ -54,5 +54,8 @@
             @endif
         </div>
     </div>
+    <div class="container my-5">
+        <a href="{{ route('export.tournees') }}" class="btn btn-info mb-4">Exporter en Excel</a>
+    </div>
 </div>
 @endsection

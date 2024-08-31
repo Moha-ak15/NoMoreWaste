@@ -14,11 +14,13 @@ use App\Http\Controllers\BackOffice\ProduitController;
 use App\Http\Controllers\Backoffice\SkillBenevoleController;
 use App\Http\Controllers\BackOffice\ServiceProposalController;
 use App\Http\Controllers\BackOffice\ServicePlanningController;
-
+use Maatwebsite\Excel\Facades\Excel;
+use App\Exports\CollectesExport;
+use App\Exports\TourneesExport;
+use App\Exports\ServicesExport;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
@@ -54,11 +56,16 @@ Route::middleware(['auth'])->group(function () {
 
 
 // Routes pour les Commerçants
-/* Route::middleware(['auth', 'role:commercant'])->group(function () {
-    Route::get('/commercant', [CommercantController::class, 'dashboard'])->name('commercant.dashboard');
-    Route::get('/commercant/collectes', [CommercantController::class, 'collectes'])->name('commercant.collectes');
-    Route::get('/commercant/profile', [CommercantController::class, 'profile'])->name('commercant.profile');
-}); */
+Route::middleware(['auth', 'role:commercant'])->group(function () {
+    Route::get('/commercant', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'dashboard'])->name('commercant.dashboard');
+
+    Route::get('/commercant/collectes', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'collectes'])->name('commercant.collectes');
+    Route::get('/commercant/profile', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'profile'])->name('commercant.profile');
+
+    Route::get('/devenir-partenaire', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'showRegistrationForm'])->name('commercantfront.inscription');
+    Route::post('/inscription-commercant', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'register'])->name('commercantfront.register');
+});
+
 
 // Route BackOffice
 Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
@@ -78,5 +85,22 @@ Route::prefix('admin')->middleware(['auth', 'role:admin'])->group(function () {
     Route::post('service_proposals/{id}/approve', [ServiceProposalController::class, 'approve'])->name('service_proposals.approve');
     Route::post('service_proposals/{id}/reject', [ServiceProposalController::class, 'reject'])->name('service_proposals.reject');
 });
+
+// Route Export
+
+// Collectes
+Route::get('/export/collectes', function () {
+    return Excel::download(new CollectesExport, 'collectes.xlsx');
+})->name('export.collectes');
+
+// Route pour exporter les tournées
+Route::get('/export/tournees', function () {
+    return Excel::download(new TourneesExport, 'tournees.xlsx');
+})->name('export.tournees');
+
+// Route pour exporter les services
+Route::get('/export/services', function () {
+    return Excel::download(new ServicesExport, 'services.xlsx');
+})->name('export.services');
 
 require __DIR__.'/auth.php';

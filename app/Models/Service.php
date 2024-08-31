@@ -28,7 +28,7 @@ class Service extends Model
 
     public function proposals()
     {
-        return $this->hasMany(ServiceProposal::class, 'service_id', 'service_id');
+        return $this->hasOne(ServiceProposal::class, 'service_id', 'service_id');
     }
 
     public function plannings()

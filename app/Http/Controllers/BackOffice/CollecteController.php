@@ -13,7 +13,8 @@ class CollecteController extends Controller
 {
     public function index(Request $request, Commercant $commercants)
     {
-        $query = Collecte::where('commercant_id', $commercants->commercant_id);
+        $query = Collecte::with('commercant', 'benevoles', 'vehicules')
+        ->where('commercant_id', $commercants->commercant_id);
 
         if ($request->filled('statut_collecte')) {
             $query->where('statut_collecte', $request->statut_collecte);
