@@ -16,6 +16,11 @@ class Service extends Model
         'nom', 'description', 'statut'
     ];
 
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'service_user', 'service_id', 'user_id')->withTimestamps();
+    }
+
     public function benevoles()
     {
         return $this->belongsToMany(Benevole::class, 'benevoles_services', 'service_id', 'benevole_id');

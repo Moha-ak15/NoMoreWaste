@@ -25,6 +25,11 @@ class Tournee extends Model
     {
         return $this->belongsToMany(Benevole::class, 'registration_benevoles', 'tournee_id', 'benevole_id');
     }
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'tournee_user', 'tournee_id', 'user_id')->withTimestamps();
+    }
+
 
 
 }
