@@ -1,65 +1,35 @@
 <?php
-
 namespace App\Http\Controllers\FrontOffice;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Collecte;
+use Illuminate\Http\Request;
 
 class CollecteController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        // Récupérer toutes les collectes programmées
+        $collectes = Collecte::where('statut_collecte', 'programmer')->get();
+        return view('frontoffice.collectes.index', compact('collectes'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
+    public function show($id)
     {
-        //
+        // Récupérer les détails d'une collecte spécifique
+        $collectes = Collecte::findOrFail($id);
+        return view('frontoffice.collectes.show', compact('collectes'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     */
-    public function store(Request $request)
+    public function inscription(Request $request, $id)
     {
-        //
-    }
+        // Inscription à une collecte
+        $collectes = Collecte::findOrFail($id);
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
+        $user = auth()->user();
+        $user->collectes()->attach($collectes->collecte_id);
 
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
-
-    /**
-     * Update the specified resource in storage.
-     */
-    public function update(Request $request, string $id)
-    {
-        //
-    }
-
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(string $id)
-    {
-        //
+        return redirect()->route('collectesfront.show', $collectes->collecte_id)
+            ->with('success', 'Vous êtes inscrit à cette collecte avec succès. :)');
     }
 }

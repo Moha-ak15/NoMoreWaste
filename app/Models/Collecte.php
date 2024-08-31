@@ -9,7 +9,7 @@ class Collecte extends Model
 {
     use HasFactory;
 
-    protected $primaryKey = 'id_collecte';
+    protected $primaryKey = 'collecte_id';
     protected $table = 'collectes';
 
     protected $fillable = [
@@ -34,4 +34,10 @@ class Collecte extends Model
     {
         return $this->belongsToMany(Vehicule::class, 'collecte_vehicule', 'collecte_id', 'vehicule_id');
     }
+
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'collecte_user', 'collecte_id', 'user_id')->withTimestamps();
+    }
+
 }

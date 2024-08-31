@@ -18,15 +18,40 @@ use App\Http\Controllers\BackOffice\ServicePlanningController;
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::get('/profile', [ProfileController::class, 'show'])->name('profile.show');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
+
 // Route FrontOffice
-Route::middleware('auth')->group(function () {
+Route::middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\FrontOffice\HomeController::class, 'index'])->name('frontoffice.home');
     Route::get('/dashboard', [App\Http\Controllers\FrontOffice\DashboardController::class, 'index'])->name('frontoffice.dashboard');
+
+    // Services
+    Route::resource('/services', 'App\Http\Controllers\FrontOffice\ServiceController')->names([
+        'index' => 'servicesfront.index',
+        'show' => 'servicesfront.show',
+    ]);
+    Route::post('/services/{id}/inscription', [App\Http\Controllers\FrontOffice\ServiceController::class, 'inscription'])->name('servicesfront.inscription');
+
+    // Collectes
+    Route::resource('/collectes', 'App\Http\Controllers\FrontOffice\CollecteController')->names([
+        'index' => 'collectesfront.index',
+        'show' => 'collectesfront.show',
+    ]);
+    Route::post('/collectes/{id}/inscription', [App\Http\Controllers\FrontOffice\CollecteController::class, 'inscription'])->name('collectesfront.inscription');
+
+    // Tournees
+    Route::resource('/tournees', 'App\Http\Controllers\FrontOffice\TourneeController')->names([
+        'index' => 'tourneesfront.index',
+        'show' => 'tourneesfront.show',
+    ]);
+    Route::post('/tournees/{id}/inscription', [App\Http\Controllers\FrontOffice\TourneeController::class, 'inscription'])->name('tourneesfront.inscription');
+
 });
+
 
 // Routes pour les Commerçants
 /* Route::middleware(['auth', 'role:commercant'])->group(function () {

@@ -41,10 +41,10 @@
                     {
                         title: '{{ $plannings->service->nom }}',
                         start: '{{ $plannings->date_debut }}',
-                        end: '{{ $plannings->date_fin }}', // Étend l'événement jusqu'à cette date
-                        backgroundColor: 'yellow',  // Couleur de fond
-                        borderColor: 'orange',  // Couleur de la bordure
-                        textColor: 'black'  // Couleur du texte (si besoin)
+                        end: '{{ $plannings->date_fin }}',
+                        backgroundColor: 'yellow',
+                        borderColor: 'orange',
+                        textColor: 'black'
                     }
                 ],
                 eventClick: function(info) {

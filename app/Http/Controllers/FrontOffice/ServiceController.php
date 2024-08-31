@@ -2,17 +2,33 @@
 
 namespace App\Http\Controllers\FrontOffice;
 
-use Illuminate\Http\Request;
 use App\Http\Controllers\Controller;
+use App\Models\Service;
+use Illuminate\Http\Request;
 
 class ServiceController extends Controller
 {
-    /**
-     * Display a listing of the resource.
-     */
     public function index()
     {
-        //
+        $services = Service::all();
+        return view('frontoffice.services.index', compact('services'));
+    }
+
+    public function show($id)
+    {
+        $services = Service::with('plannings')->findOrFail($id);
+        return view('frontoffice.services.show', compact('services'));
+    }
+
+    public function inscription(Request $request, $id)
+    {
+        $services = Service::findOrFail($id);
+
+        $user = auth()->user();
+        $user->services()->attach($services->service_id);
+
+        return redirect()->route('servicesfront.show', $services->service_id)
+            ->with('success', 'Vous êtes inscrit à ce service avec succès.');
     }
 
     /**
@@ -31,17 +47,6 @@ class ServiceController extends Controller
         //
     }
 
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
     public function edit(string $id)
     {
         //

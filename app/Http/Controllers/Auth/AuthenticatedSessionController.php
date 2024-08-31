@@ -35,7 +35,9 @@ class AuthenticatedSessionController extends Controller
             // Redirection autant qu'admin
             if (Auth::user()->usertype === 'admin') {
                 return redirect()->route('dashboard');
-            } else { // Redirection autant que client si on est pas admin
+            } elseif (Auth::user()->usertype === 'commercant') {
+                return redirect()->route('commercant.dashboard');
+            } else {
                 return redirect()->route('frontoffice.home');
             }
         }
