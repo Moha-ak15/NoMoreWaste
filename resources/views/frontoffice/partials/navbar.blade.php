@@ -7,7 +7,7 @@
             <div>
                 <a href="{{ route('frontoffice.home') }}" class="text-white px-3">Home</a>
                 <a href="{{ route('frontoffice.dashboard') }}" class="text-white px-3">Dashboard</a>
-                <a href="{{ route('commercantfront.inscription') }}" class="text-white bg-green-500 hover:bg-green-700 px-3 py-2 rounded">
+                <a href="{{ route('commercantfront.inscription-commercant') }}" class="text-white bg-green-500 hover:bg-green-700 px-3 py-2 rounded">
                     Devenir Partenaire
                 </a>
                 <a href="{{ route('logout') }}" class="text-white px-3"

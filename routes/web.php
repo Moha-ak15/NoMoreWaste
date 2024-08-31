@@ -62,9 +62,10 @@ Route::middleware(['auth', 'role:commercant'])->group(function () {
     Route::get('/commercant/collectes', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'collectes'])->name('commercant.collectes');
     Route::get('/commercant/profile', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'profile'])->name('commercant.profile');
 
-    Route::get('/devenir-partenaire', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'showRegistrationForm'])->name('commercantfront.inscription');
-    Route::post('/inscription-commercant', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'register'])->name('commercantfront.register');
 });
+
+Route::get('/devenir-partenaire', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'registrationForm'])->name('commercantfront.inscription-commercant');
+Route::post('/inscription-commercant', [App\Http\Controllers\CommercantOffice\CommercantController::class, 'register'])->name('commercantfront.register');
 
 
 // Route BackOffice

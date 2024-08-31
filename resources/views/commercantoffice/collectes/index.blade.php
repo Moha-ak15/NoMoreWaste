@@ -23,7 +23,7 @@
                     <tr>
                         <td>{{ $collecte->date_collecte }}</td>
                         <td>{{ $collecte->produit->nom }}</td>
-                        <td>{{ $collecte->quantite_collecte }} kg</td>
+                        <td>{{ $collecte->quantite_collectee }} kg</td>
                         <td><span class="badge bg-primary">{{ ucfirst($collecte->statut_collecte) }}</span></td>
                     </tr>
                 @endforeach
