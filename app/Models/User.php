@@ -36,7 +36,12 @@ class User extends Authenticatable
     {
         return $this->belongsToMany(Tournee::class, 'tournee_user', 'user_id', 'tournee_id')->withTimestamps();
     }
-    
+
+    public function commercant()
+    {
+        return $this->hasOne(Commercant::class, 'commercant_id');  // ou 'commercant_id' selon ta clé étrangère
+    }
+
     /**
      * The attributes that should be hidden for serialization.
      *

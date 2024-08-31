@@ -10,10 +10,8 @@
     <!-- FullCalendar CSS -->
     <link href="https://cdn.jsdelivr.net/npm/fullcalendar@5.10.1/main.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
-    <style>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" rel="stylesheet">
 
-    </style>
 
     <!-- Autres fichiers CSS -->
     @vite(['resources/css/app.css', 'resources/js/app.js'])
@@ -21,13 +19,30 @@
 <body>
     @include('frontoffice.partials.navbar')
 
-    <div class="sidebar">
-        <h4>Menu</h4>
-        <a href="{{ route('frontoffice.home')}}">Home</a>
-        <a href="{{ route('servicesfront.index')}}">Services</a>
-        <a href="{{ route('collectesfront.index')}}">Collectes</a>
-        <a href="{{ route('tourneesfront.index')}}">Tournées</a>
-        <a href="{{ route('profile.show')}}">Profil</a>
+    <div class="sidebar bg-light shadow-sm p-3">
+        <h4 class="text-primary mb-4">Menu</h4>
+        <ul class="nav flex-column">
+            <li class="nav-item mb-2">
+                <a href="{{ route('frontoffice.home')}}" class="nav-link text-dark d-flex align-items-center">
+                    <i class="fas fa-home me-2"></i> Home
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a href="{{ route('servicesfront.index')}}" class="nav-link text-dark d-flex align-items-center">
+                    <i class="fas fa-concierge-bell me-2"></i> Services
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a href="{{ route('collectesfront.index')}}" class="nav-link text-dark d-flex align-items-center">
+                    <i class="fas fa-truck me-2"></i> Collectes
+                </a>
+            </li>
+            <li class="nav-item mb-2">
+                <a href="{{ route('tourneesfront.index')}}" class="nav-link text-dark d-flex align-items-center">
+                    <i class="fas fa-route me-2"></i> Tournées
+                </a>
+            </li>
+        </ul>
     </div>
 
     <div class="main-content">

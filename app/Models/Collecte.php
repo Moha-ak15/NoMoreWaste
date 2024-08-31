@@ -18,7 +18,7 @@ class Collecte extends Model
 
     public function commercant()
     {
-        return $this->belongsTo(Commercant::class, 'commercant_id');
+        return $this->belongsTo(Commercant::class, 'commercant_id', 'commercant_id');
     }
 
     public function produit()

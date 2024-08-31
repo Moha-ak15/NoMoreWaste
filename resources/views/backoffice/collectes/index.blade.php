@@ -84,6 +84,7 @@
             </div>
         </div>
     </div>
+    <a href="{{ route('export.collectes') }}" class="btn btn-secondary mb-4">Exporter les Détails en Excel</a>
 </div>
 
 @endsection
