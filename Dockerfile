@@ -1,5 +1,5 @@
 FROM php:8.3.10-fpm
-RUN apk update && apk add --no-cache \
+RUN apt-get update && apt-get install --no-cache \
     openssl \
     zip \
     unzip \
@@ -22,8 +22,6 @@ EXPOSE 80
 RUN php artisan key:generate
 RUN php artisan migrate
 
-RUN apk del openssl zip unzip curl nodejs npm openssh bash git
-RUN rm -rf /var/cache/apk/*
 RUN rm -rf /root/.composer
 
 CMD php artisan serve --host=0.0.0.0 --port=80
