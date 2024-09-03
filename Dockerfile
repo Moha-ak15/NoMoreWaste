@@ -33,5 +33,4 @@ RUN php artisan key:generate
 RUN php artisan migrate
 
 RUN rm -rf /root/.composer
-RUN npm run build
 CMD php artisan serve --host=0.0.0.0 --port=80
