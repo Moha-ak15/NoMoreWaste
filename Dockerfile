@@ -1,4 +1,4 @@
-FROM php:8.2.19-zts-alpine3.20
+FROM php:8.3.10-fpm
 RUN apk update && apk add --no-cache \
     openssl \
     zip \
