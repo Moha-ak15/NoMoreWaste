@@ -2,26 +2,23 @@
 @import 'tailwindcss/components';
 @import 'tailwindcss/utilities';
 
-
+/*
 #calendar {
-    max-width: 700px; /* Réduit la largeur de moitié */
+    max-width: 700px;
     margin: 0 auto;
     padding: 0 10px;
-    height: 500px; /* Réduit la hauteur de moitié */
+    height: 500px;
 }
 
-/* Texte du mois */
 .fc-toolbar-title {
     font-size: 10px;
 }
 
-/* bouton 'Aujourd'hui' */
 .fc-button.fc-button-primary {
     font-size: 14px;
     padding: 4px 8px;
 }
 
-/* Flèches de navigation */
 .fc-button-group .fc-button {
     font-size: 14px;
     padding: 4px 8px;
@@ -75,3 +72,4 @@
     margin-left: 260px;
     padding: 20px;
 }
+ */
