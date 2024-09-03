@@ -1,5 +1,5 @@
 FROM php:8.3.10-fpm
-RUN apt-get update && apt-get install --no-cache \
+RUN apt-get update && apt-get install -y\
     openssl \
     zip \
     unzip \
