@@ -11,12 +11,11 @@ RUN apt-get update && apt-get install -y \
     npm \
     bash \
     git \
-    php-mysql \
     libzip-dev \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
     && docker-php-ext-install -j$(nproc) gd
 
-RUN docker-php-ext-install zip
+RUN docker-php-ext-install zip pdo pdo_mysql
 
 WORKDIR /app
 
