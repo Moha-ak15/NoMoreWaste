@@ -6,7 +6,6 @@ RUN apt-get update && apt-get install -y\
     curl \
     nodejs \
     npm \
-    openssh \
     bash \
     git
 WORKDIR /app
