@@ -29,7 +29,7 @@ Route::middleware('auth')->group(function () {
 // Route FrontOffice
 Route::middleware(['auth'])->group(function () {
     Route::get('/', [App\Http\Controllers\FrontOffice\HomeController::class, 'index'])->name('frontoffice.home');
-    Route::get('/dashboard', [App\Http\Controllers\FrontOffice\DashboardController::class, 'index'])->name('frontoffice.dashboard');
+    Route::get('dashboard', [App\Http\Controllers\FrontOffice\DashboardController::class, 'index'])->name('frontoffice.dashboard');
 
     // Services
     Route::resource('/services', 'App\Http\Controllers\FrontOffice\ServiceController')->names([
