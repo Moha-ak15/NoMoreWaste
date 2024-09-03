@@ -29,9 +29,8 @@ RUN composer update -W
 RUN composer install
 EXPOSE 80
 RUN php artisan key:generate
+RUN php artisan migrate
 
 RUN rm -rf /root/.composer
 
-RUN php artisan serve --host=0.0.0.0 --port=80
-
-CMD php artisan migrate
+CMD php artisan serve --host=0.0.0.0 --port=80
