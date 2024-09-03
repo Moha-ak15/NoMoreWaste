@@ -22,6 +22,7 @@ WORKDIR /app
 RUN git clone "https://github.com/Moha-ak15/NoMoreWaste.git" .
 
 RUN mv .env.example .env
+RUN npm install
 
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 ENV COMPOSER_ALLOW_SUPERUSER=1
@@ -32,5 +33,5 @@ RUN php artisan key:generate
 RUN php artisan migrate
 
 RUN rm -rf /root/.composer
-
+RUN npm run dev
 CMD php artisan serve --host=0.0.0.0 --port=80
