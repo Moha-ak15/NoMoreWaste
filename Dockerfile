@@ -1,5 +1,8 @@
-FROM php:8.3.10-fpm
-RUN apt-get update && apt-get install -y\
+FROM php:8.2-fpm
+RUN apt-get update && apt-get install -y \
+    libfreetype-dev \
+    libjpeg62-turbo-dev \
+    libpng-dev \
     openssl \
     zip \
     unzip \
@@ -7,7 +10,9 @@ RUN apt-get update && apt-get install -y\
     nodejs \
     npm \
     bash \
-    git
+    git \
+    && docker-php-ext-configure gd --with-freetype --with-jpeg \
+    && docker-php-ext-install -j$(nproc) gd 
 WORKDIR /app
 
 RUN git clone "https://github.com/Moha-ak15/NoMoreWaste.git" .
