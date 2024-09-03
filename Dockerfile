@@ -12,7 +12,8 @@ RUN apt-get update && apt-get install -y \
     bash \
     git \
     && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) gd
+    && docker-php-ext-install -j$(nproc) gd \
+    && docker-php-ext-install zip
 WORKDIR /app
 
 RUN git clone "https://github.com/Moha-ak15/NoMoreWaste.git" .
